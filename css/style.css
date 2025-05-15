@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.recipe-card {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  div {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+    cursor: pointer;
+    font-size: 2em;
+  }
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+    div {
+      transform: translateY(0);
+    }
+  }
+}
+#mealFocus {
+  background-color: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    width: 70%;
+    height: 80%;
+    overflow: auto;
+    padding: 1em;
+
+    .card-head {
+      display: flex;
+      margin-bottom: 1em;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        h5 {
+          font-size: 1.5em;
+          font-weight: bold;
+        }
+        p {
+          font-size: 0.8em;
+          line-height: 0.5em;
+        }
+      }
+      img {
+        width: 20%;
+        border-radius: var(--bs-card-border-radius);
+        margin-right: 1em;
+      }
+    }
+    .Tags {
+      font-size: 0.8em;
+      padding: 0.5em;
+      margin: 0 0 1em 0;
+    }
+    h5 {
+      margin-top: 0.5em;
+    }
+  }
+}
+#closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2.5em;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
+}
+/* loading screen */
+@keyframes pulse_animation {
+  0% {
+    box-shadow: 0 0 0 0 rgba(254, 206, 104, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 200px rgba(254, 206, 104, 0);
+  }
+}
+
+#pulse-wrapper {
+  background: rgba(255, 255, 255);
+  display: flex;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+}
+#pulse-wrapper #pulse {
+  margin: auto;
+}
+#pulse-wrapper #pulse span {
+  position: absolute;
+  margin-top: -25px; /* = height / 2 */
+  margin-left: -25px; /* = width / 2 */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fece68;
+  animation: pulse_animation 1.3s infinite;
+}
+#pulse-wrapper #pulse span:nth-child(2) {
+  animation-delay: 0.3s; /* Start the second wave with some delay */
+}
