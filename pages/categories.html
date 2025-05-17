@@ -10,10 +10,10 @@
     <title>Yummy</title>
   </head>
   <body>
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-body-tertiary position-fixed top-0 start-0 end-0 z-3">
       <div class="container-fluid">
         <a class="navbar-brand ps-3" href="../index.html">
-          <img src="imgs/yummy.png" alt="" width="30" />
+          <img src="../imgs/yummy.png" alt="" width="30" />
           <span>Yummy</span>
         </a>
         <button
@@ -30,38 +30,40 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
             <li class="nav-item">
-              <a class="nav-link" id="searchRecipe" href="search.html"
+              <a class="nav-link" href="search.html"
                 >Search</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" id="" href="#">Categories</a>
+              <a class="nav-link active" href="categories.html">Categories</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="" href="#">Area</a>
+              <a class="nav-link" href="Area.html">Area</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="" href="#">Ingredients</a>
+              <a class="nav-link" href="Ingredients.html">Ingredients</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="" href="#">Contact Us</a>
+              <a class="nav-link" href="Contact Us.html">Contact Us</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <section class="container mb-3">
+    <section class="container mb-3 mt-5">
       <div class="row">
-        <div class="col-12 text-center" id="Head">
+        <div class="col-12 text-center" id="catHead">
           <h1 class="mt-5">Categories</h1>
         </div>
       </div>
 
+      <div class="row mt-5 row-gap-3" id="cats"></div>
       <div class="row mt-5 row-gap-3" id="recipes"></div>
     </section>
 
-    <section id="mealFocus" class="d-none"></section>
+    <section id="mealFocus" class="d-none">
+    </section>
 
     <div id="pulse-wrapper">
       <div id="pulse">

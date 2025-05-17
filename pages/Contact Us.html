@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../imgs/yummy.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Yummy</title>
+  </head>
+  <body class="d-flex flex-column justify-content-center align-items-center">
+    <nav class="navbar bg-body-tertiary position-fixed top-0 start-0 end-0 z-3">
+      <div class="container-fluid">
+        <a class="navbar-brand ps-3" href="../index.html">
+          <img src="../imgs/yummy.png" alt="" width="30" />
+          <span>Yummy</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+            <li class="nav-item">
+              <a class="nav-link" href="search.html">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.html">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Area.html">Area</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Ingredients.html">Ingredients</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="Contact Us.html">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Contact Us Form using Bootstrap -->
+    <form id="contactForm" class="container mt-5" style="max-width: 500px">
+      <h2 class="mb-4">Contact Us</h2>
+      <div class="mb-3">
+        <label for="contactName" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="contactName"
+          placeholder="Your Name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="contactEmail" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="contactEmail"
+          placeholder="name@example.com"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="contactMessage" class="form-label">Message</label>
+        <textarea
+          class="form-control"
+          id="contactMessage"
+          rows="4"
+          placeholder="Your message..."
+          required
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+
+    <script src="../js/all.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
