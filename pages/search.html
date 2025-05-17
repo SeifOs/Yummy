@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="imgs/yummy.png" type="image/x-icon" />
-    <link rel="stylesheet" href="css/all.min.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="../imgs/yummy.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Yummy</title>
   </head>
   <body>
@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
             <li class="nav-item">
-              <a class="nav-link"  href="pages/search.html">Search</a>
+              <a class="nav-link active" href="pages/search.html">Search</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="pages/categories.html">Categories</a>
@@ -52,8 +52,9 @@
     <section class="container mb-3">
       <div class="row">
         <div class="col-12 text-center" id="Head">
-          <h1 class="mt-5">Welcome to Yummy</h1>
-          <p class="lead">Your one-stop solution for delicious recipes!</p>
+          <h1 class="mt-5">Search for a recipe</h1>
+            <input type="text" id="searchInput" placeholder="Search by name..." class="form-control mt-3" />
+            <input type="text" id="searchByFirstLetter" placeholder="Search by first letter..." class="form-control mt-3" maxlength="1" title="Please enter a single letter." />
         </div>
       </div>
 
@@ -70,8 +71,8 @@
       </div>
     </div>
 
-    <script src="js/all.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="../js/all.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>

@@ -1,6 +1,8 @@
 var recipes = document.getElementById("recipes");
 var mealFocus = document.getElementById("mealFocus");
 var loading = document.getElementById("pulse-wrapper"); // Reference to the loading element
+var searchInput = document.getElementById("searchInput");
+var searchByFirstLetter = document.getElementById("searchByFirstLetter");
 var meals = [];
 
 function getMeals(api) {
@@ -92,5 +94,26 @@ window.addEventListener("click", function (e) {
 window.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     hideMealFocus();
+  }
+});
+
+searchInput.addEventListener("keyup", function (e) {
+  if (e.target.value.length > 0) {
+    recipes.innerHTML = "";
+    meals = [];
+    getMeals(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${e.target.value}`
+    );
+  } else {
+    recipes.innerHTML = "";
+    meals = [];
+    getMeals("https://www.themealdb.com/api/json/v1/1/search.php?s=");
+  }
+});
+searchByFirstLetter.addEventListener("keyup", function (e) {
+  if (e.target.value.length > 0) {
+    recipes.innerHTML = "";
+    meals = [];
+    getMeals(`https://www.themealdb.com/api/json/v1/1/search.php?f=${e.target.value}`);
   }
 });
