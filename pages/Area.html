@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../imgs/yummy.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Yummy</title>
+  </head>
+  <body>
+    <nav class="navbar bg-body-tertiary position-fixed top-0 start-0 end-0 z-3">
+      <div class="container-fluid">
+        <a class="navbar-brand ps-3" href="../index.html">
+          <img src="../imgs/yummy.png" alt="" width="30" />
+          <span>Yummy</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+            <li class="nav-item">
+              <a class="nav-link" href="search.html"
+                >Search</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.html">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="Area.html">Area</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Ingredients.html">Ingredients</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Contact Us.html">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="container mb-3 mt-5">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="mt-5">Areas</h1>
+        </div>
+      </div>
+
+      <div class="row mt-5 row-gap-3 " id="areas"></div>
+      <div class="row mt-5 row-gap-3" id="recipes"></div>
+    </section>
+
+    <section id="mealFocus" class="d-none">
+    </section>
+
+    <div id="pulse-wrapper">
+      <div id="pulse">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <script src="../js/all.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

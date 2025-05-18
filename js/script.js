@@ -4,7 +4,9 @@ var loading = document.getElementById("pulse-wrapper"); // Reference to the load
 var searchInput = document.getElementById("searchInput");
 var searchByFirstLetter = document.getElementById("searchByFirstLetter");
 var cats = document.getElementById("cats");
+var areasContainer = document.getElementById("areas");
 var contactForm = document.getElementById("contactForm");
+var areas = [];
 var meals = [];
 var categories = [];
 
@@ -39,31 +41,33 @@ function getCat(api) {
       loading.classList.add("d-none");
     });
 }
-function displayCat() {
-  for (let i = 0; i < categories.length; i++) {
-    cats.innerHTML += `
-        <div class="col-md-4" >
-            <div class="recipe-card">
-                <img src="${
-                  categories[i].strCategoryThumb
-                }" class="rounded-3" alt="${categories[i].strCategory}" />
-                <div class='mealCat' id='${categories[i].strCategory}'>${
-      categories[i].strCategory
-    }<p>${categories[i].strCategoryDescription
-      .split(" ")
-      .slice(0, 20)
-      .join(" ")}</p></div>
-            </div>
-            </div>
-        `;
-  }
+function getAreas(api) {
+  loading.classList.remove("d-none");
+  fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      areas = data.meals;
+      console.log(areas);
+      displayAreas();
+    })
+    .finally(() => {
+      loading.classList.add("d-none");
+    });
 }
+
 async function displayMeals() {
   if (window.location.pathname.includes("categories.html")) {
-    let meal = await getMealById(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meals[0].idMeal}`);
-    console.log(meal);
+    let meal = await getMealById(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meals[0].idMeal}`
+    );
     
+
     recipes.innerHTML = `<h2 class="text-center">${meal.strCategory}</h2>`;
+  } else if (window.location.pathname.includes("Area.html")) {
+    let meal = await getMealById(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meals[0].idMeal}`
+    );
+    recipes.innerHTML = `<h2 class="text-center">${meal.strArea}</h2>`;
   }
   for (let i = 0; i < meals.length; i++) {
     recipes.innerHTML += `
@@ -92,6 +96,40 @@ function getMealById(api) {
       loading.classList.add("d-none");
       return null;
     });
+}
+function displayCat() {
+  for (let i = 0; i < categories.length; i++) {
+    cats.innerHTML += `
+        <div class="col-md-4" >
+            <div class="recipe-card">
+                <img src="${
+                  categories[i].strCategoryThumb
+                }" class="rounded-3" alt="${categories[i].strCategory}" />
+                <div class='mealCat' id='${categories[i].strCategory}'>${
+      categories[i].strCategory
+    }<p>${categories[i].strCategoryDescription
+      .split(" ")
+      .slice(0, 20)
+      .join(" ")}</p></div>
+            </div>
+            </div>
+        `;
+  }
+}
+function displayAreas() {
+  areasContainer.innerHTML = "";
+  for (let i = 0; i < areas.length; i++) {
+    console.log(areas[i]);
+
+    areasContainer.innerHTML += `
+       <div class="col-md-4" >
+            <div class="recipe-card p-2">
+                <i class="fa-solid fa-house-laptop fa-4x"></i>
+                <div class='mealArea' id='${areas[i].strArea}'>${areas[i].strArea}</div>
+            </div>
+            </div>
+    `;
+  }
 }
 
 if (recipes) {
@@ -154,6 +192,18 @@ if (cats) {
     }
   });
 }
+if (areasContainer) {
+  areasContainer.addEventListener("click", function (e) {
+    const areaDiv = e.target.closest(".mealArea");
+    if (areaDiv && areasContainer.contains(areaDiv)) {
+      let area = areaDiv.id;
+      console.log(area);
+      areasContainer.classList.add("d-none");
+      getMeal(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
+    }
+  });
+}
+
 // Close the meal focus when clicking outside of it
 window.addEventListener("click", function (e) {
   if (e.target === mealFocus) {
@@ -200,4 +250,6 @@ if (window.location.pathname.includes("categories.html")) {
   window.location.pathname.includes("search.html")
 ) {
   getMeal("https://www.themealdb.com/api/json/v1/1/search.php?s=");
+} else if (window.location.pathname.includes("Area.html")) {
+  getAreas("https://www.themealdb.com/api/json/v1/1/list.php?a=list");
 }
