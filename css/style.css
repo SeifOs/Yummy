@@ -17,7 +17,7 @@ body{
 h1{
   font-family: SourGummy, sans-serif;
   font-weight: bold;
-  font-size: 3.5em;
+  font-size: 4em;
 }
 .recipe-card {
   width: 100%;
@@ -115,6 +115,10 @@ h1{
   color: white;
   cursor: pointer;
   z-index: 1;
+}
+a{
+  color: white;
+  cursor: pointer;
 }
 /* loading screen */
 @keyframes pulse_animation {

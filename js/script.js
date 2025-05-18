@@ -4,6 +4,7 @@ var loading = document.getElementById("pulse-wrapper"); // Reference to the load
 var searchInput = document.getElementById("searchInput");
 var searchByFirstLetter = document.getElementById("searchByFirstLetter");
 var cats = document.getElementById("cats");
+var contactForm = document.getElementById("contactForm");
 var meals = [];
 var categories = [];
 
@@ -43,14 +44,27 @@ function displayCat() {
     cats.innerHTML += `
         <div class="col-md-4" >
             <div class="recipe-card">
-                <img src="${categories[i].strCategoryThumb}" class="rounded-3" alt="${categories[i].strCategory}" />
-                <div class='mealCat' id='${categories[i].strCategory}'>${categories[i].strCategory}<p>${categories[i].strCategoryDescription.split(' ').slice(0, 20).join(' ')}</p></div>
+                <img src="${
+                  categories[i].strCategoryThumb
+                }" class="rounded-3" alt="${categories[i].strCategory}" />
+                <div class='mealCat' id='${categories[i].strCategory}'>${
+      categories[i].strCategory
+    }<p>${categories[i].strCategoryDescription
+      .split(" ")
+      .slice(0, 20)
+      .join(" ")}</p></div>
             </div>
             </div>
         `;
   }
 }
-function displayMeals() {
+async function displayMeals() {
+  if (window.location.pathname.includes("categories.html")) {
+    let meal = await getMealById(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meals[0].idMeal}`);
+    console.log(meal);
+    
+    recipes.innerHTML = `<h2 class="text-center">${meal.strCategory}</h2>`;
+  }
   for (let i = 0; i < meals.length; i++) {
     recipes.innerHTML += `
         <div class="col-md-4" >
@@ -83,10 +97,12 @@ function getMealById(api) {
 if (recipes) {
   recipes.addEventListener("click", async function (e) {
     // Find the closest ancestor with class 'mealName'
-    const mealNameDiv = e.target.closest('.mealName');
+    const mealNameDiv = e.target.closest(".mealName");
     if (mealNameDiv && recipes.contains(mealNameDiv)) {
       var mealID = meals[mealNameDiv.id].idMeal;
-      var meal = await getMealById(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`);
+      var meal = await getMealById(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
+      );
       if (!meal) return;
 
       var ingredients = [];
@@ -128,12 +144,12 @@ if (recipes) {
   });
 }
 if (cats) {
-  cats.addEventListener('click', function (e) {
+  cats.addEventListener("click", function (e) {
     // Find the closest ancestor with class 'mealCat'
-    const mealCatDiv = e.target.closest('.mealCat');
+    const mealCatDiv = e.target.closest(".mealCat");
     if (mealCatDiv && cats.contains(mealCatDiv)) {
       let cat = mealCatDiv.id;
-      cats.classList.add('d-none');
+      cats.classList.add("d-none");
       getMeal(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`);
     }
   });
@@ -151,7 +167,7 @@ window.addEventListener("keydown", function (e) {
 });
 
 if (searchInput) {
-  searchInput.addEventListener("keydown", function (e) {
+  searchInput.addEventListener("keyup", function (e) {
     if (e.target.value.length > 0) {
       recipes.innerHTML = "";
       meals = [];
@@ -166,7 +182,7 @@ if (searchInput) {
   });
 }
 if (searchByFirstLetter) {
-  searchByFirstLetter.addEventListener("keydown", function (e) {
+  searchByFirstLetter.addEventListener("keyup", function (e) {
     if (e.target.value.length > 0) {
       recipes.innerHTML = "";
       meals = [];
@@ -179,6 +195,9 @@ if (searchByFirstLetter) {
 
 if (window.location.pathname.includes("categories.html")) {
   getCat("https://www.themealdb.com/api/json/v1/1/categories.php");
-} else {
+} else if (
+  window.location.pathname.includes("index.html") ||
+  window.location.pathname.includes("search.html")
+) {
   getMeal("https://www.themealdb.com/api/json/v1/1/search.php?s=");
 }

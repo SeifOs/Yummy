@@ -51,7 +51,7 @@
 
     <!-- Contact Us Form using Bootstrap -->
     <form id="contactForm" class="container mt-5" style="max-width: 500px">
-      <h2 class="mb-4">Contact Us</h2>
+      <h1 class="mb-4">Contact Us</h1>
       <div class="mb-3">
         <label for="contactName" class="form-label">Name</label>
         <input
@@ -73,14 +73,45 @@
         />
       </div>
       <div class="mb-3">
-        <label for="contactMessage" class="form-label">Message</label>
-        <textarea
+        <label for="contactPhone" class="form-label">Phone Number</label>
+        <input
+          type="tel"
           class="form-control"
-          id="contactMessage"
-          rows="4"
-          placeholder="Your message..."
+          id="contactPhone"
+          placeholder="e.g. 0123456789"
           required
-        ></textarea>
+        />
+      </div>
+      <div class="mb-3">
+        <label for="contactAge" class="form-label">Age</label>
+        <input
+          type="number"
+          class="form-control"
+          id="contactAge"
+          placeholder="Your Age"
+          min="1"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="contactPassword" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="contactPassword"
+          placeholder="Password"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="contactPassword2" class="form-label">Retype Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="contactPassword2"
+          placeholder="Retype Password"
+          required
+        />
       </div>
       <button type="submit" class="btn btn-primary">Send Message</button>
     </form>
