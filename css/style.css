@@ -141,6 +141,19 @@ a{
     margin: auto;
   }
 }
+::selection {
+  background: #fece68;
+  color: white;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #fece68;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff9800 60%, #fece68 100%);
+}
 /* loading screen */
 @keyframes pulse_animation {
   0% {
