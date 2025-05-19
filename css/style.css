@@ -11,9 +11,6 @@
   font-family: SourGummy;
   src: url(../fonts/SourGummy.ttf);
 }
-body{
-  min-height: 100vh;  
-}
 h1{
   font-family: SourGummy, sans-serif;
   font-weight: bold;
@@ -119,6 +116,19 @@ h1{
 a{
   color: white;
   cursor: pointer;
+}
+.Area-ingredient{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover{
+    background-color: rgb(202, 202, 202);
+  }
 }
 /* loading screen */
 @keyframes pulse_animation {

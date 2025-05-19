@@ -6,9 +6,11 @@ var searchByFirstLetter = document.getElementById("searchByFirstLetter");
 var cats = document.getElementById("cats");
 var areasContainer = document.getElementById("areas");
 var contactForm = document.getElementById("contactForm");
+var Ingredients = document.getElementById("Ingredients");
 var areas = [];
 var meals = [];
 var categories = [];
+var ingredients = [];
 
 function getMeal(api) {
   // Show the loading spinner
@@ -54,13 +56,43 @@ function getAreas(api) {
       loading.classList.add("d-none");
     });
 }
+function getIngredients(api) {
+  loading.classList.remove("d-none");
+  fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      ingredients = data.meals;
+      displayIngredients();
+    })
+    .finally(() => {
+      loading.classList.add("d-none");
+    });
+}
+function displayIngredients() {
+  console.log(ingredients[0]);
+  for (let i = 0; i < 20; i++) {
+    Ingredients.innerHTML += `
+        <div class="col-md-4" >
+            <div class="recipe-card Area-ingredient">
+            <i class="fa-solid fa-bowl-food"></i>
+            <h3 class='mealIngredient' id='${ingredients[i].strIngredient}'>${
+      ingredients[i].strIngredient
+    }</h3>
+            <p class='mealIngredient'>${ingredients[i].strDescription
+              .split(" ")
+              .slice(0, 10)
+              .join(" ")}</p>
+            </div>
+            </div>
+        `;
+  }
+}
 
 async function displayMeals() {
   if (window.location.pathname.includes("categories.html")) {
     let meal = await getMealById(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meals[0].idMeal}`
     );
-    
 
     recipes.innerHTML = `<h2 class="text-center">${meal.strCategory}</h2>`;
   } else if (window.location.pathname.includes("Area.html")) {
@@ -123,9 +155,9 @@ function displayAreas() {
 
     areasContainer.innerHTML += `
        <div class="col-md-4" >
-            <div class="recipe-card p-2">
+            <div class="recipe-card Area-ingredient">
                 <i class="fa-solid fa-house-laptop fa-4x"></i>
-                <div class='mealArea' id='${areas[i].strArea}'>${areas[i].strArea}</div>
+                <h3 class='mealArea' id='${areas[i].strArea}'>${areas[i].strArea}</h3>
             </div>
             </div>
     `;
@@ -203,6 +235,19 @@ if (areasContainer) {
     }
   });
 }
+if(Ingredients){
+  Ingredients.addEventListener("click", function (e) {
+    const ingredientDiv = e.target.closest(".mealIngredient");
+    if (ingredientDiv && Ingredients.contains(ingredientDiv)) {
+      let ingredient = ingredientDiv.id;
+      console.log(ingredient);
+      Ingredients.classList.add("d-none");
+      getMeal(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+      );
+    }
+  });
+}
 
 // Close the meal focus when clicking outside of it
 window.addEventListener("click", function (e) {
@@ -245,11 +290,13 @@ if (searchByFirstLetter) {
 
 if (window.location.pathname.includes("categories.html")) {
   getCat("https://www.themealdb.com/api/json/v1/1/categories.php");
+} else if (window.location.pathname.includes("Area.html")) {
+  getAreas("https://www.themealdb.com/api/json/v1/1/list.php?a=list");
+} else if (window.location.pathname.includes("Ingredients")) {
+  getIngredients("https://www.themealdb.com/api/json/v1/1/list.php?i=list");
 } else if (
   window.location.pathname.includes("index.html") ||
   window.location.pathname.includes("search.html")
 ) {
   getMeal("https://www.themealdb.com/api/json/v1/1/search.php?s=");
-} else if (window.location.pathname.includes("Area.html")) {
-  getAreas("https://www.themealdb.com/api/json/v1/1/list.php?a=list");
 }
