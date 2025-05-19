@@ -5,33 +5,42 @@ var contactAge = document.getElementById("contactAge");
 var contactPassword = document.getElementById("contactPassword");
 var contactPassword2 = document.getElementById("contactPassword2");
 var contactForm = document.getElementById("contactForm");
+var submitBtn = contactForm.querySelector('button[type="submit"]');
 
 var isOk = [false, false, false, false, false, false]; // Flag to check if all inputs are valid
 
 var nameRegex = /^[a-zA-Z ]{2,}$/; // Name: at least 2 letters, spaces allowed
-var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 var phoneRegex = /^01[0125][0-9]{8}$/; // Egyptian phone
 var ageRegex = /^(1[6-9]|[2-9][0-9]|100)$/; // Age: 16-100
 var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/; // Password: min 8 chars, 1 uppercase, 1 lowercase, 1 digit
 
-function validation(unitTest, regex){
-    if (unitTest.value.match(regex)) {
-        return true;
-    } else {
-        return false;
-    }
+function validation(unitTest, regex) {
+  return unitTest.value.match(regex) ? true : false;
 }
 
-contactName.addEventListener("input", function() {
-    if (validation(contactName, nameRegex)) {
-        contactName.classList.add("is-valid");
-        contactName.classList.remove("is-invalid");
-        isOk[0] = true;
-    } else {
-        contactName.classList.add("is-invalid");
-        contactName.classList.remove("is-valid");
-        isOk[0] = false;
-    }
+function updateSubmitState() {
+  if (isOk.every(Boolean)) {
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
+}
+
+// Initial state
+submitBtn.disabled = true;
+
+contactName.addEventListener("input", function () {
+  if (validation(contactName, nameRegex)) {
+    contactName.classList.add("is-valid");
+    contactName.classList.remove("is-invalid");
+    isOk[0] = true;
+  } else {
+    contactName.classList.add("is-invalid");
+    contactName.classList.remove("is-valid");
+    isOk[0] = false;
+  }
+  updateSubmitState();
 });
 contactEmail.addEventListener("input", function () {
   if (validation(contactEmail, emailRegex)) {
@@ -43,6 +52,7 @@ contactEmail.addEventListener("input", function () {
     contactEmail.classList.remove("is-valid");
     isOk[1] = false;
   }
+  updateSubmitState();
 });
 contactPhone.addEventListener("input", function () {
   if (validation(contactPhone, phoneRegex)) {
@@ -54,6 +64,7 @@ contactPhone.addEventListener("input", function () {
     contactPhone.classList.remove("is-valid");
     isOk[2] = false;
   }
+  updateSubmitState();
 });
 contactAge.addEventListener("input", function () {
   if (validation(contactAge, ageRegex)) {
@@ -65,6 +76,7 @@ contactAge.addEventListener("input", function () {
     contactAge.classList.remove("is-valid");
     isOk[3] = false;
   }
+  updateSubmitState();
 });
 contactPassword.addEventListener("input", function () {
   if (validation(contactPassword, passwordRegex)) {
@@ -76,9 +88,13 @@ contactPassword.addEventListener("input", function () {
     contactPassword.classList.remove("is-valid");
     isOk[4] = false;
   }
+  updateSubmitState();
 });
 contactPassword2.addEventListener("input", function () {
-  if (contactPassword2.value == contactPassword.value) {
+  if (
+    contactPassword2.value == contactPassword.value &&
+    contactPassword2.value !== ""
+  ) {
     contactPassword2.classList.add("is-valid");
     contactPassword2.classList.remove("is-invalid");
     isOk[5] = true;
@@ -87,20 +103,21 @@ contactPassword2.addEventListener("input", function () {
     contactPassword2.classList.remove("is-valid");
     isOk[5] = false;
   }
+  updateSubmitState();
 });
 contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-  if (isOk[0] && isOk[1] && isOk[2] && isOk[3] && isOk[4] && isOk[5]) {
+  e.preventDefault();
+  if (isOk.every(Boolean)) {
     Swal.fire({
       title: "Done",
       text: "Form submitted successfully!",
       icon: "success",
     });
-  } else {
-    Swal.fire({
-      title: "Oops...",
-      text: "Please fill out the form correctly.",
-      icon: "error",
+    contactForm.reset();
+    document.querySelectorAll(".is-valid, .is-invalid").forEach((el) => {
+      el.classList.remove("is-valid", "is-invalid");
     });
+    isOk = [false, false, false, false, false, false];
+    updateSubmitState();
   }
 });
