@@ -50,9 +50,9 @@
     </nav>
 
     <!-- Contact Us Form using Bootstrap -->
-    <form id="contactForm" class="container mt-5" style="max-width: 500px">
-      <h1 class="mb-4">Contact Us</h1>
-      <div class="mb-3">
+    <h1 class="mb-4">Contact Us</h1>
+    <form id="contactForm" class="container mt-5 row" style="max-width: 500px">
+      <div class="mb-3 col-md-6">
         <label for="contactName" class="form-label">Name</label>
         <input
           type="text"
@@ -61,8 +61,12 @@
           placeholder="Your Name"
           required
         />
+        <p class="valid-feedback text-success">Looks good!</p>
+        <p class="invalid-feedback text-danger">
+          at least 2 letters, spaces allowed
+        </p>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <label for="contactEmail" class="form-label">Email address</label>
         <input
           type="email"
@@ -71,8 +75,10 @@
           placeholder="name@example.com"
           required
         />
+        <p class="valid-feedback text-success">Looks good!</p>
+        <p class="invalid-feedback text-danger">please enter a valid email</p>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <label for="contactPhone" class="form-label">Phone Number</label>
         <input
           type="tel"
@@ -81,8 +87,10 @@
           placeholder="e.g. 0123456789"
           required
         />
+        <p class="valid-feedback text-success">Looks good!</p>
+        <p class="invalid-feedback text-danger">please enter a valid Egyptian phone number</p>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <label for="contactAge" class="form-label">Age</label>
         <input
           type="number"
@@ -92,8 +100,10 @@
           min="1"
           required
         />
+        <p class="valid-feedback text-success">Looks good!</p>
+        <p class="invalid-feedback text-danger">age must be between 16 and 100</p>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <label for="contactPassword" class="form-label">Password</label>
         <input
           type="password"
@@ -102,8 +112,10 @@
           placeholder="Password"
           required
         />
+        <p class="valid-feedback text-success">Looks good!</p>
+        <p class="invalid-feedback text-danger">min 8 chars with 1 uppercase, 1 lowercase, and 1 digit at least</p>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <label for="contactPassword2" class="form-label">Retype Password</label>
         <input
           type="password"
@@ -112,12 +124,15 @@
           placeholder="Retype Password"
           required
         />
+        <p class="valid-feedback text-success">Looks good!</p>
+        <p class="invalid-feedback text-danger">the passwords are not the same</p>
       </div>
       <button type="submit" class="btn btn-primary">Send Message</button>
     </form>
 
     <script src="../js/all.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/contactValidation.js"></script>
   </body>
 </html>

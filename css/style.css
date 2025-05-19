@@ -11,6 +11,9 @@
   font-family: SourGummy;
   src: url(../fonts/SourGummy.ttf);
 }
+body{
+  min-height: 100vh;  
+}
 h1{
   font-family: SourGummy, sans-serif;
   font-weight: bold;
@@ -128,6 +131,14 @@ a{
 
   &:hover{
     background-color: rgb(202, 202, 202);
+  }
+}
+#contactForm{
+  max-width: 80% !important;
+
+  button{
+    width: fit-content;
+    margin: auto;
   }
 }
 /* loading screen */
